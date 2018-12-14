@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "dev": "webpack --mode development --devtool source-map",
     "start": "webpack-dev-server --open",
-    "devServ": "webpack-dev-server --open --devtool source-map"
+    "devServ": "webpack-dev-server --open --mode development --devtool source-map"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "redux-devtools-extension": "^2.13.7",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.0",
     "typescript": "^3.1.6",
@@ -34,8 +35,13 @@
   "dependencies": {
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
+    "@types/react-redux": "^6.0.10",
+    "@types/redux-logger": "^3.0.6",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.1"
   }
