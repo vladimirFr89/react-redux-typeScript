@@ -21,7 +21,4 @@ const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(logger),
 ));
 
-store.dispatch(addTodo({ id: 1, label: 'learn typeScript 3.1', status: 0 }));
-store.dispatch(setFilter(1));
-
 export default store;

@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 
-import { IAppState, ISetFilterAction } from '../interfaces';
+import { ISetFilterAction } from '../interfaces';
 
 import { SET_FILTER } from '../constants';
 
