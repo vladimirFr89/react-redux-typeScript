@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { updateTodo, removeTodo } from '../actions';
+import { updateTodo, removeTodo, setStatus } from '../actions';
 import { Dispatch } from 'redux';
-import { IRemoveTodoAcrion, ITodo, IUpdateTodoAction } from '../interfaces';
+import { IRemoveTodoAction, ITodo, ITodoStatus, IUpdateTodoAction, ISetStatusAction } from '../interfaces';
 
 import ItemTodoContentDefault from './ItemTodoContentDefault';
 import ItemTodoContentEdit from './ItemTodoContentEdit';
@@ -18,6 +18,7 @@ interface OwnProps {
 interface DispatchProps {
   updateTodo: typeof updateTodo;
   removeTodo: typeof removeTodo;
+  setStatus: typeof setStatus;
 }
 
 type Props = OwnProps & DispatchProps;
@@ -48,6 +49,12 @@ class ItemTodo extends React.Component<Props, State>{
     removeTodo(todo.id);
   }
 
+  changeTodoStatus = () => {
+    const { todo, setStatus } = this.props;
+    console.log(`changeState ${todo.id} ${todo.label} ${todo.status}`);
+    setStatus({ id: todo.id, status: 1 });
+  }
+
   render () {
     const { isEdit } = this.state;
     const { todo } = this.props;
@@ -56,20 +63,24 @@ class ItemTodo extends React.Component<Props, State>{
         { isEdit ? (
           <ItemTodoContentEdit title={todo.label} update={this.updateTodo} toggle={this.toggleEditState}/>
         ) : (
-          <ItemTodoContentDefault title={todo.label} remove={this.removeTodo} toggle={this.toggleEditState}/>
+          <ItemTodoContentDefault title={todo.label} remove={this.removeTodo} changeStatus={this.changeTodoStatus} toggle={this.toggleEditState}/>
         ) }
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<IUpdateTodoAction | IRemoveTodoAcrion>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IUpdateTodoAction | IRemoveTodoAction | ISetStatusAction >): DispatchProps => ({
   updateTodo: (value: ITodo) => {
     return dispatch(updateTodo(value));
   },
 
   removeTodo: (id: number) => {
     return dispatch(removeTodo(id));
+  },
+
+  setStatus: (status: ITodoStatus) => {
+    return dispatch(setStatus(status));
   },
 });
 

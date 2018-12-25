@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { ADD_TODO, SET_FILTER, UPDATE_TODO, DELETE_TODO } from '../constants';
+import { ADD_TODO, SET_FILTER, UPDATE_TODO, DELETE_TODO, SET_STATUS_TODO } from '../constants';
 
 export interface IAppState {
   todos: ITodo[];
@@ -33,13 +33,28 @@ export interface IUpdateTodoActionCreator {
 }
 
 /** Интерфейс для action удаления туду из списка*/
-export interface IRemoveTodoAcrion extends Action<typeof DELETE_TODO>{
+export interface IRemoveTodoAction extends Action<typeof DELETE_TODO>{
   payload: number;
 }
 
 /** Интерфейс для actionCreator удаления туду из списка*/
 export interface IRemoveTodoActionCreator {
-  (id: number): IRemoveTodoAcrion;
+  (id: number): IRemoveTodoAction;
+}
+
+export interface ITodoStatus {
+  id: number;
+  status: number;
+}
+
+/** Интерфейс для action установки статуса туду*/
+export interface ISetStatusAction extends Action<typeof SET_STATUS_TODO>{
+  payload: ITodoStatus;
+}
+
+/** Интерфейс для actionCreator установки статуса туду*/
+export interface ISetStatusActionCreator {
+  (status:ITodoStatus): ISetStatusAction;
 }
 
 /** Интерфейс для action установки фильтра*/
