@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IAppState, ISetFilterAction } from '../interfaces';
+import { IAppState, ISetFilterAction, StatusTodo } from '../interfaces';
 import { setFilter } from '../actions';
 import { Dispatch } from 'redux';
 
 import TodoList from './TodoList';
 import ItemTodoCreate from './ItemTodoCreate';
-
-interface OwnProps {
-  name: string;
-}
 
 interface MapStateToProps {
   filter: number;
@@ -19,13 +15,20 @@ interface DispatchProps {
   setFilter: typeof setFilter;
 }
 
-type ComponentProps = OwnProps & MapStateToProps & DispatchProps;
+type ComponentProps = MapStateToProps & DispatchProps;
 
 class App extends React.Component<ComponentProps, {}>{
 
-  setFilterUp = () => {
-    const { filter } = this.props;
-    this.props.setFilter(filter + 1);
+  setFilterAll = () => {
+    this.props.setFilter(StatusTodo.ALL);
+  }
+
+  setFilterNew = () => {
+    this.props.setFilter(StatusTodo.NEW);
+  }
+
+  setFilterDone = () => {
+    this.props.setFilter(StatusTodo.DONE);
   }
 
   render() {
@@ -35,7 +38,9 @@ class App extends React.Component<ComponentProps, {}>{
           <TodoList/>
           <ItemTodoCreate />
           <span>{name} поставил фильтр {filter}</span>
-          <button onClick={this.setFilterUp}>SetFilter</button>
+          <button onClick={this.setFilterAll}>ALL</button>
+          <button onClick={this.setFilterNew}>NEW</button>
+          <button onClick={this.setFilterDone}>DONE</button>
         </div>
     );
   }

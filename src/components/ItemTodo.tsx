@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { updateTodo, removeTodo, setStatus } from '../actions';
-import { Dispatch } from 'redux';
-import { IRemoveTodoAction, ITodo, ITodoStatus, IUpdateTodoAction, ISetStatusAction } from '../interfaces';
+import {connect} from 'react-redux';
+import {removeTodo, setStatus, updateTodo} from '../actions';
+import {Dispatch} from 'redux';
+import {IRemoveTodoAction, ISetStatusAction, ITodo, ITodoStatus, IUpdateTodoAction, StatusTodo} from '../interfaces';
 
 import ItemTodoContentDefault from './ItemTodoContentDefault';
 import ItemTodoContentEdit from './ItemTodoContentEdit';
@@ -52,7 +52,7 @@ class ItemTodo extends React.Component<Props, State>{
   changeTodoStatus = () => {
     const { todo, setStatus } = this.props;
     console.log(`changeState ${todo.id} ${todo.label} ${todo.status}`);
-    setStatus({ id: todo.id, status: 1 });
+    setStatus({ id: todo.id, status: todo.status === StatusTodo.NEW ? StatusTodo.DONE : StatusTodo.NEW });
   }
 
   render () {
@@ -63,7 +63,12 @@ class ItemTodo extends React.Component<Props, State>{
         { isEdit ? (
           <ItemTodoContentEdit title={todo.label} update={this.updateTodo} toggle={this.toggleEditState}/>
         ) : (
-          <ItemTodoContentDefault title={todo.label} remove={this.removeTodo} changeStatus={this.changeTodoStatus} toggle={this.toggleEditState}/>
+          <ItemTodoContentDefault
+              title={todo.label}
+              status={todo.status}
+              changeStatus={this.changeTodoStatus}
+              remove={this.removeTodo}
+              toggle={this.toggleEditState}/>
         ) }
       </div>
     );

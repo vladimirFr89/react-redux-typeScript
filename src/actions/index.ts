@@ -1,5 +1,5 @@
 import {
-    ITodo, ITodoStatus,
+    ITodo, ITodoStatus, StatusTodo,
     IAddTodoAction, IAddTodoActionCreator,
     ISetFilterAction, ISetFilterActionCreator,
     IUpdateTodoAction, IUpdateTodoActionCreator,

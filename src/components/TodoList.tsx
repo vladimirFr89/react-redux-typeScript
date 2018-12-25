@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IAppState, ITodo } from '../interfaces';
+import { IAppState, ITodo, StatusTodo } from '../interfaces';
 
 import ItemTodo from './ItemTodo';
 
-interface MapStateToProps {
-  todos: ITodo[];
-}
-
-type ComponentProps = MapStateToProps;
+type ComponentProps = IAppState;
 
 class TodoList extends React.Component<ComponentProps, {}>{
   render() {
-    const { todos } = this.props;
+    const { todos, filter } = this.props;
     const items = todos.map((todo: ITodo) => {
-      return (<li key={String(todo.id)}><ItemTodo todo={todo} /></li>);
+      if (filter === StatusTodo.ALL) {
+        return (<li key={String(todo.id)}><ItemTodo todo={todo} /></li>);
+      }
+
+      if (todo.status === filter) {
+        return (<li key={String(todo.id)}><ItemTodo todo={todo} /></li>);
+      }
     });
     return (
       <ul className="List">
@@ -24,8 +26,9 @@ class TodoList extends React.Component<ComponentProps, {}>{
   }
 }
 
-const mapStateToProps = (state: IAppState): MapStateToProps => ({
+const mapStateToProps = (state: IAppState): IAppState => ({
   todos: state.todos,
+  filter: state.filter,
 });
 
-export default connect<MapStateToProps>(mapStateToProps)(TodoList);
+export default connect<IAppState>(mapStateToProps)(TodoList);

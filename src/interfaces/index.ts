@@ -3,13 +3,19 @@ import { ADD_TODO, SET_FILTER, UPDATE_TODO, DELETE_TODO, SET_STATUS_TODO } from 
 
 export interface IAppState {
   todos: ITodo[];
-  filter: number;
+  filter: StatusTodo;
+}
+
+export enum StatusTodo {
+    NEW,
+    DONE,
+    ALL,
 }
 
 export interface ITodo {
   id: number;
   label: string;
-  status: number;
+  status: StatusTodo;
 }
 
 /** Интерфейс для action добавления нового туду */
@@ -44,7 +50,7 @@ export interface IRemoveTodoActionCreator {
 
 export interface ITodoStatus {
   id: number;
-  status: number;
+  status: StatusTodo;
 }
 
 /** Интерфейс для action установки статуса туду*/
@@ -59,10 +65,10 @@ export interface ISetStatusActionCreator {
 
 /** Интерфейс для action установки фильтра*/
 export interface ISetFilterAction extends Action<typeof SET_FILTER> {
-  payload: number;
+  payload: StatusTodo;
 }
 
 /** Интерфейс для actionCreator установки фильтра*/
 export interface ISetFilterActionCreator {
-  (value: number): ISetFilterAction;
+  (value: StatusTodo): ISetFilterAction;
 }

@@ -1,10 +1,10 @@
 import { Reducer } from 'redux';
 
-import { ISetFilterAction } from '../interfaces';
+import { ISetFilterAction, StatusTodo } from '../interfaces';
 
 import { SET_FILTER } from '../constants';
 
-export const filter: Reducer<number, ISetFilterAction> = (state = 0, action) => {
+export const filter: Reducer<StatusTodo, ISetFilterAction> = (state = StatusTodo.NEW, action) => {
   switch (action.type) {
     case SET_FILTER:
       return action.payload;
