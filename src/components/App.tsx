@@ -4,6 +4,9 @@ import { IAppState, ISetFilterAction } from '../interfaces';
 import { setFilter } from '../actions';
 import { Dispatch } from 'redux';
 
+import TodoList from './TodoList';
+import ItemTodoCreate from './ItemTodoCreate';
+
 interface OwnProps {
   name: string;
 }
@@ -26,9 +29,11 @@ class App extends React.Component<ComponentProps, {}>{
   }
 
   render() {
-    const { name, filter } = this.props;
+    const { filter } = this.props;
     return (
         <div>
+          <TodoList/>
+          <ItemTodoCreate />
           <span>{name} поставил фильтр {filter}</span>
           <button onClick={this.setFilterUp}>SetFilter</button>
         </div>
