@@ -34,10 +34,9 @@ class App extends React.Component<ComponentProps, {}>{
   render() {
     const { filter } = this.props;
     return (
-        <div>
+        <div className="main">
           <TodoList/>
           <ItemTodoCreate />
-          <span>{name} поставил фильтр {filter}</span>
           <button onClick={this.setFilterAll}>ALL</button>
           <button onClick={this.setFilterNew}>NEW</button>
           <button onClick={this.setFilterDone}>DONE</button>

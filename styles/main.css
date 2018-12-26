@@ -1,3 +1,38 @@
 body {
-    background-color: darkgray;
+    background-color: #fff;
+}
+
+
+.main {
+    width: 600px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+button {
+    border: none;
+}
+
+.List {
+    padding: 0;
+    background-color: inherit;
+}
+
+.List li {
+    list-style-type: none;
+}
+
+.Item {
+    width: 100%;
+}
+
+.Item__input {
+    padding: 5px 3px;
+    border: none;
+    border-bottom: 1px solid aqua;
+}
+
+.Item__button {
+    padding: 5px 3px;
+    margin-left: 5px;
 }
